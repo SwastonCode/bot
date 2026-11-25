@@ -8,7 +8,13 @@ from aiogram.types import Message
 
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = os.getenv("8605210560:AAGPGgIeHN9cL27RrP0lPCSckl5R0YOfUJc")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise SystemExit(
+        "BOT_TOKEN не задан. В Railway: Settings -> Variables -> добавь BOT_TOKEN "
+        "со значением токена от @BotFather (без кавычек и пробелов)."
+    )
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -39,8 +45,6 @@ async def echo(message: Message):
 
 
 async def main():
-    if not BOT_TOKEN:
-        raise RuntimeError("BOT_TOKEN не задан. Установи переменную окружения BOT_TOKEN.")
     await dp.start_polling(bot)
 
 
